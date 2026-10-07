@@ -1,0 +1,3681 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Name & Role Randomizer | Teacher Khen</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;500;600;700&family=Luckiest+Guy&family=Nunito:wght@400;600;700;800&display=swap" rel="stylesheet">
+
+<style>
+
+:root{
+    --wood-light:#e7c99a;
+    --wood:#c9975b;
+    --wood-dark:#875a31;
+    --wood-deep:#603d22;
+    --cream:#fff8e8;
+    --paper:#fffdf5;
+    --brown:#6b4426;
+    --gold:#f4c95d;
+    --orange:#ef8b45;
+    --green:#68a66a;
+    --blue:#5d94c7;
+    --pink:#dc7891;
+    --shadow:0 8px 18px rgba(78,48,24,.18);
+}
+
+*{
+    box-sizing:border-box;
+}
+
+html,
+body{
+    margin:0;
+    padding:0;
+    min-height:100%;
+}
+
+body{
+    font-family:"Nunito",sans-serif;
+    color:var(--brown);
+
+    background-image:url("background.png");
+    background-size:cover;
+    background-position:center center;
+    background-repeat:no-repeat;
+    background-attachment:fixed;
+
+    min-height:100vh;
+}
+
+button,
+textarea,
+input{
+    font:inherit;
+}
+
+button{
+    cursor:pointer;
+}
+
+.page{
+    display:none;
+    min-height:100vh;
+}
+
+.page.active{
+    display:block;
+}
+
+
+/* =========================================================
+   TITLE PAGE
+========================================================= */
+
+#titlePage{
+    display:none;
+    align-items:center;
+    justify-content:center;
+    padding:25px;
+    min-height:100vh;
+}
+
+#titlePage.active{
+    display:flex;
+}
+
+.titleDecor{
+    position:fixed;
+    inset:0;
+    pointer-events:none;
+    overflow:hidden;
+}
+
+.decor{
+    position:absolute;
+    font-size:clamp(30px,5vw,70px);
+    opacity:.8;
+    filter:drop-shadow(0 4px 3px rgba(0,0,0,.12));
+}
+
+.decor.one{
+    top:7%;
+    left:7%;
+    transform:rotate(-12deg);
+}
+
+.decor.two{
+    top:13%;
+    right:8%;
+    transform:rotate(13deg);
+}
+
+.decor.three{
+    bottom:9%;
+    left:9%;
+    transform:rotate(12deg);
+}
+
+.decor.four{
+    bottom:8%;
+    right:9%;
+    transform:rotate(-15deg);
+}
+
+.titleCard{
+    width:min(900px,95vw);
+
+    background:rgba(255,250,235,.78);
+
+    border:6px solid var(--wood-dark);
+    border-radius:30px;
+
+    padding:42px 35px 30px;
+
+    text-align:center;
+
+    box-shadow:
+        0 14px 0 #6f492b,
+        0 24px 35px rgba(67,43,22,.25);
+
+    position:relative;
+
+    backdrop-filter:blur(2px);
+    -webkit-backdrop-filter:blur(2px);
+}
+
+.titleRibbon{
+    display:inline-block;
+
+    padding:9px 20px;
+
+    border-radius:999px;
+
+    background:var(--wood-dark);
+
+    color:#fff7df;
+
+    font-weight:900;
+
+    font-size:clamp(12px,2vw,17px);
+
+    letter-spacing:1px;
+
+    box-shadow:0 4px 0 #4e311c;
+}
+
+.mainTitle{
+    margin:18px 0 5px;
+
+    font-family:"Luckiest Guy",cursive;
+
+    font-size:clamp(48px,8vw,92px);
+
+    line-height:.95;
+
+    color:#f7c85c;
+
+    -webkit-text-stroke:3px #6d4225;
+
+    text-shadow:
+        0 5px 0 #a7602c,
+        0 9px 0 #75421f,
+        0 13px 15px rgba(60,35,15,.25);
+}
+
+.titleSubtitle{
+    margin:15px auto 25px;
+
+    max-width:700px;
+
+    font-size:clamp(16px,2.5vw,22px);
+
+    font-weight:800;
+
+    color:#795031;
+
+    text-shadow:
+        0 1px 0 rgba(255,255,255,.7);
+}
+
+.featurePills{
+    display:flex;
+
+    justify-content:center;
+
+    flex-wrap:wrap;
+
+    gap:10px;
+
+    margin-bottom:28px;
+}
+
+.featurePill{
+    padding:8px 15px;
+
+    border-radius:999px;
+
+    color:#fff;
+
+    font-weight:900;
+
+    box-shadow:
+        0 4px 0 rgba(73,43,20,.2);
+}
+
+.featurePill:nth-child(1){
+    background:var(--blue);
+}
+
+.featurePill:nth-child(2){
+    background:var(--green);
+}
+
+.featurePill:nth-child(3){
+    background:var(--orange);
+}
+
+.featurePill:nth-child(4){
+    background:var(--pink);
+}
+
+.titleButtons{
+    display:flex;
+
+    justify-content:center;
+
+    gap:12px;
+
+    flex-wrap:wrap;
+}
+
+.bigButton{
+    border:0;
+
+    border-radius:16px;
+
+    padding:14px 25px;
+
+    font-weight:900;
+
+    color:white;
+
+    font-size:17px;
+
+    box-shadow:
+        0 6px 0 rgba(81,47,24,.3);
+
+    transition:.15s;
+}
+
+.bigButton:hover{
+    transform:translateY(-2px);
+}
+
+.bigButton:active{
+    transform:translateY(3px);
+
+    box-shadow:
+        0 3px 0 rgba(81,47,24,.3);
+}
+
+.startButton{
+    background:#6ba76d;
+}
+
+.settingsButton{
+    background:#d28a4e;
+}
+
+.credit{
+    margin-top:27px;
+
+    font-size:13px;
+
+    font-weight:800;
+
+    opacity:.7;
+}
+
+
+/* =========================================================
+   SETTINGS
+========================================================= */
+
+#settingsPage{
+    padding:18px;
+}
+
+.settingsShell{
+    width:min(1250px,100%);
+
+    margin:auto;
+}
+
+.topBar{
+    display:flex;
+
+    align-items:center;
+
+    justify-content:space-between;
+
+    gap:15px;
+
+    background:rgba(255,248,233,.82);
+
+    border:4px solid var(--wood-dark);
+
+    border-radius:18px;
+
+    padding:12px 16px;
+
+    box-shadow:var(--shadow);
+
+    backdrop-filter:blur(2px);
+
+    -webkit-backdrop-filter:blur(2px);
+}
+
+.appLogo{
+    font-family:"Luckiest Guy",cursive;
+
+    font-size:clamp(20px,3vw,28px);
+
+    color:#8a552d;
+
+    letter-spacing:.5px;
+
+    text-shadow:
+        0 1px 0 rgba(255,255,255,.7);
+}
+
+.topBarButtons{
+    display:flex;
+
+    gap:8px;
+
+    flex-wrap:wrap;
+}
+
+.smallButton{
+    border:0;
+
+    border-radius:10px;
+
+    padding:8px 12px;
+
+    font-size:12px;
+
+    font-weight:900;
+
+    color:white;
+
+    background:#81522d;
+
+    box-shadow:
+        0 3px 0 rgba(70,40,20,.25);
+}
+
+.settingsIntro{
+    margin:18px 0;
+
+    background:rgba(255,248,233,.80);
+
+    border-left:8px solid var(--gold);
+
+    border-radius:15px;
+
+    padding:16px 20px;
+
+    box-shadow:var(--shadow);
+
+    backdrop-filter:blur(2px);
+
+    -webkit-backdrop-filter:blur(2px);
+}
+
+.settingsIntro h2{
+    margin:0 0 5px;
+
+    font-family:"Luckiest Guy",cursive;
+
+    font-size:32px;
+
+    color:#80512d;
+}
+
+.settingsIntro p{
+    margin:0;
+
+    font-weight:700;
+
+    color:#5b3b22;
+}
+
+.settingsGrid{
+    display:grid;
+
+    grid-template-columns:1fr 1fr;
+
+    gap:18px;
+}
+
+.settingsCard{
+    background:rgba(255,250,235,.80);
+
+    border:3px solid var(--wood-dark);
+
+    border-radius:18px;
+
+    padding:17px;
+
+    box-shadow:var(--shadow);
+
+    backdrop-filter:blur(2px);
+
+    -webkit-backdrop-filter:blur(2px);
+}
+
+.settingsCard h3{
+    margin:0 0 10px;
+
+    font-size:18px;
+
+    color:#5f3c22;
+}
+
+.settingsCard textarea{
+    width:100%;
+
+    min-height:190px;
+
+    resize:vertical;
+
+    border:3px solid #c79b65;
+
+    border-radius:12px;
+
+    padding:12px;
+
+    background:rgba(255,253,247,.88);
+
+    color:#54361f;
+
+    outline:none;
+
+    font-size:15px;
+
+    line-height:1.5;
+}
+
+.settingsCard textarea:focus{
+    border-color:#8d5c31;
+}
+
+.fullWidth{
+    grid-column:1 / -1;
+}
+
+.rolePictureGrid{
+    display:grid;
+
+    grid-template-columns:
+        repeat(
+            auto-fit,
+            minmax(220px,1fr)
+        );
+
+    gap:12px;
+}
+
+.rolePictureItem{
+    background:rgba(255,253,246,.82);
+
+    border:2px dashed #c49a68;
+
+    border-radius:14px;
+
+    padding:12px;
+}
+
+.rolePictureItem strong{
+    display:block;
+
+    margin-bottom:8px;
+
+    font-size:14px;
+
+    color:#57371f;
+}
+
+.rolePictureItem input{
+    width:100%;
+
+    font-size:12px;
+}
+
+.picturePreview{
+    width:70px;
+
+    height:70px;
+
+    object-fit:cover;
+
+    border-radius:12px;
+
+    margin-top:8px;
+
+    border:2px solid #c49a68;
+
+    background:#f3e2c4;
+}
+
+.settingsActions{
+    display:flex;
+
+    gap:10px;
+
+    flex-wrap:wrap;
+
+    margin-top:18px;
+}
+
+.actionButton{
+    border:0;
+
+    border-radius:12px;
+
+    padding:11px 16px;
+
+    font-weight:900;
+
+    color:white;
+
+    box-shadow:
+        0 4px 0 rgba(75,43,22,.25);
+}
+
+.saveGo{
+    background:#629b65;
+}
+
+.saveFile{
+    background:#668eb8;
+}
+
+.loadFile{
+    background:#8c72ae;
+}
+
+.clearFile{
+    background:#bd6a61;
+}
+
+.homeFile{
+    background:#795838;
+}
+
+
+/* =========================================================
+   GAME PAGE
+========================================================= */
+
+#gamePage{
+    padding:14px;
+}
+
+.gameShell{
+    width:min(1250px,100%);
+
+    margin:auto;
+}
+
+.gameTitle{
+    width:max-content;
+
+    max-width:100%;
+
+    margin:10px auto 12px;
+
+    padding:8px 22px;
+
+    background:
+        linear-gradient(
+            135deg,
+            #c89255,
+            #dfb57c
+        );
+
+    border:3px solid #76502e;
+
+    border-radius:12px;
+
+    color:#fff8e8;
+
+    font-family:"Luckiest Guy",cursive;
+
+    font-size:clamp(20px,3vw,30px);
+
+    text-align:center;
+
+    letter-spacing:.5px;
+
+    text-shadow:
+        0 2px 0 #70431f;
+
+    box-shadow:
+        inset 0 2px rgba(255,255,255,.25),
+        0 4px 0 #694522,
+        0 8px 15px rgba(70,42,21,.18);
+}
+
+.languageBox{
+    background:rgba(255,248,232,.84);
+
+    border:3px solid #936139;
+
+    border-radius:15px;
+
+    padding:13px 16px;
+
+    margin-bottom:12px;
+
+    box-shadow:var(--shadow);
+
+    backdrop-filter:blur(2px);
+
+    -webkit-backdrop-filter:blur(2px);
+}
+
+.promptLabel{
+    font-size:12px;
+
+    font-weight:900;
+
+    text-transform:uppercase;
+
+    letter-spacing:1px;
+
+    opacity:.8;
+
+    margin-bottom:4px;
+
+    color:#5d3c22;
+}
+
+.promptText{
+    font-size:clamp(22px,3vw,32px);
+
+    line-height:1.25;
+
+    font-weight:900;
+
+    color:#69411f;
+
+    text-shadow:
+        0 1px 0 rgba(255,255,255,.8);
+}
+
+
+/* =========================================================
+   CONTROLS
+========================================================= */
+
+.controlRow{
+    display:flex;
+
+    align-items:center;
+
+    gap:6px;
+
+    flex-wrap:nowrap;
+
+    overflow-x:auto;
+
+    padding:5px 2px 9px;
+
+    scrollbar-width:thin;
+}
+
+.controlRow button{
+    flex:0 0 auto;
+
+    white-space:nowrap;
+
+    border:0;
+
+    border-radius:9px;
+
+    padding:7px 10px;
+
+    font-size:12px;
+
+    font-weight:900;
+
+    color:white;
+
+    box-shadow:
+        0 3px 0 rgba(72,43,22,.25);
+}
+
+.modeButton{
+    background:#6e8caf;
+}
+
+.modeButton.active{
+    background:#4d6f91;
+
+    outline:
+        3px solid rgba(255,255,255,.75);
+}
+
+.randomizeButton{
+    background:#d47b3f;
+}
+
+.readButton{
+    background:#6d9d69;
+}
+
+.printButton{
+    background:#7d6e9f;
+}
+
+.helpButton{
+    background:#8b633e;
+}
+
+
+/* =========================================================
+   ASSIGNMENT BOARD
+========================================================= */
+
+.assignmentBox{
+    width:100%;
+
+    background:rgba(255,250,240,.78);
+
+    border:4px solid #76502e;
+
+    border-radius:18px;
+
+    overflow:hidden;
+
+    box-shadow:
+        0 8px 0 #8a5c35,
+        0 15px 25px rgba(75,44,21,.2);
+
+    backdrop-filter:blur(2px);
+
+    -webkit-backdrop-filter:blur(2px);
+}
+
+.resultsTable{
+    width:100%;
+
+    max-width:none;
+
+    border-collapse:collapse;
+
+    border-spacing:0;
+
+    table-layout:fixed;
+
+    margin:0;
+}
+
+.resultsTable col.nameColumn{
+    width:50%;
+}
+
+.resultsTable col.roleColumn{
+    width:50%;
+}
+
+.resultsTable thead th{
+    width:50%;
+
+    padding:11px 12px;
+
+    background:rgba(168,111,59,.94);
+
+    color:#fff9e9;
+
+    border-right:2px solid #71461f;
+
+    border-bottom:4px solid #71461f;
+
+    text-align:center;
+
+    font-family:"Luckiest Guy",cursive;
+
+    font-size:18px;
+
+    letter-spacing:.5px;
+}
+
+.resultsTable thead th:last-child{
+    border-right:0;
+}
+
+.resultsTable tbody tr{
+    width:100%;
+}
+
+.resultsTable tbody td{
+    width:50%;
+
+    padding:0;
+
+    background:rgba(255,253,246,.84);
+
+    border-right:3px solid #a87546;
+
+    border-bottom:3px solid #a87546;
+
+    vertical-align:middle;
+
+    overflow:hidden;
+}
+
+.resultsTable tbody tr:last-child td{
+    border-bottom:0;
+}
+
+.resultsTable tbody td:last-child{
+    border-right:0;
+}
+
+.nameCell{
+    min-height:76px;
+
+    padding:13px 16px !important;
+
+    text-align:left;
+
+    vertical-align:middle !important;
+
+    font-size:clamp(18px,2.4vw,25px);
+
+    font-weight:900;
+
+    line-height:1.35;
+
+    color:#4f2f19;
+
+    overflow-wrap:anywhere;
+
+    word-break:break-word;
+
+    text-shadow:
+        0 1px 0 rgba(255,255,255,.7);
+}
+
+.roleCell{
+    min-height:76px;
+
+    padding:10px 16px !important;
+
+    vertical-align:middle !important;
+
+    text-align:center;
+}
+
+.roleContent{
+    width:100%;
+
+    min-height:56px;
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:center;
+
+    gap:12px;
+
+    text-align:center;
+}
+
+.rolePicture{
+    width:58px;
+
+    height:58px;
+
+    flex:0 0 58px;
+
+    object-fit:cover;
+
+    border-radius:13px;
+
+    border:3px solid #b77b43;
+
+    background:#f2dfbf;
+
+    box-shadow:
+        0 3px 6px rgba(70,40,20,.18);
+}
+
+.roleWord{
+    flex:0 1 auto;
+
+    min-width:0;
+
+    font-size:clamp(18px,2.3vw,25px);
+
+    font-weight:900;
+
+    line-height:1.25;
+
+    color:#603719;
+
+    overflow-wrap:anywhere;
+
+    word-break:break-word;
+
+    text-shadow:
+        0 1px 0 rgba(255,255,255,.8);
+}
+
+.groupName{
+    display:flex;
+
+    flex-direction:column;
+
+    justify-content:center;
+
+    gap:4px;
+}
+
+.groupStudent{
+    line-height:1.3;
+}
+
+.emptyRow td{
+    text-align:center !important;
+
+    padding:30px !important;
+
+    font-weight:800;
+
+    color:#6d4a2c;
+}
+
+
+/* =========================================================
+   HELP
+========================================================= */
+
+.modal{
+    position:fixed;
+
+    inset:0;
+
+    background:rgba(53,31,15,.55);
+
+    display:none;
+
+    align-items:center;
+
+    justify-content:center;
+
+    padding:20px;
+
+    z-index:5000;
+}
+
+.modal.active{
+    display:flex;
+}
+
+.modalCard{
+    width:min(700px,95vw);
+
+    max-height:90vh;
+
+    overflow:auto;
+
+    background:rgba(255,248,233,.95);
+
+    border:4px solid #714821;
+
+    border-radius:20px;
+
+    padding:24px;
+
+    box-shadow:
+        0 15px 40px rgba(0,0,0,.3);
+}
+
+.modalCard h2{
+    margin-top:0;
+
+    font-family:"Luckiest Guy",cursive;
+
+    color:#754822;
+}
+
+.modalCard p{
+    line-height:1.6;
+
+    font-weight:600;
+
+    color:#57371f;
+}
+
+.closeModal{
+    display:block;
+
+    margin:18px auto 0;
+
+    border:0;
+
+    background:#7b5330;
+
+    color:white;
+
+    border-radius:10px;
+
+    padding:9px 18px;
+
+    font-weight:900;
+}
+
+
+/* =========================================================
+   MOBILE
+========================================================= */
+
+@media(max-width:800px){
+
+    body{
+        background-size:cover;
+
+        background-position:center center;
+
+        background-attachment:scroll;
+    }
+
+    .settingsGrid{
+        grid-template-columns:1fr;
+    }
+
+    .fullWidth{
+        grid-column:auto;
+    }
+
+    .titleCard{
+        padding:32px 20px 25px;
+    }
+
+    .mainTitle{
+        font-size:clamp(42px,12vw,72px);
+    }
+
+    .assignmentBox{
+        border-width:3px;
+    }
+
+    .nameCell{
+        padding:11px 10px !important;
+
+        font-size:18px;
+    }
+
+    .roleCell{
+        padding:8px 8px !important;
+    }
+
+    .roleContent{
+        gap:7px;
+    }
+
+    .rolePicture{
+        width:48px;
+
+        height:48px;
+
+        flex-basis:48px;
+    }
+
+    .roleWord{
+        font-size:18px;
+    }
+
+}
+
+
+@media(max-width:500px){
+
+    #gamePage{
+        padding:8px;
+    }
+
+    .gameTitle{
+        font-size:21px;
+
+        padding:7px 15px;
+    }
+
+    .promptText{
+        font-size:21px;
+    }
+
+    .resultsTable thead th{
+        font-size:15px;
+
+        padding:9px 6px;
+    }
+
+    .nameCell{
+        font-size:16px;
+
+        padding:10px 7px !important;
+    }
+
+    .rolePicture{
+        width:40px;
+
+        height:40px;
+
+        flex-basis:40px;
+
+        border-width:2px;
+    }
+
+    .roleWord{
+        font-size:16px;
+    }
+
+}
+
+
+/* =========================================================
+   PRINT
+========================================================= */
+
+@media print{
+
+    body{
+        background:white;
+    }
+
+    .topBar,
+    .controlRow,
+    .languageBox,
+    .gameTitle{
+        display:none !important;
+    }
+
+    #gamePage{
+        padding:0;
+    }
+
+    .assignmentBox{
+        border:2px solid #000;
+
+        box-shadow:none;
+
+        background:white;
+    }
+
+    .resultsTable th,
+    .resultsTable td{
+        border-color:#000 !important;
+
+        background:white !important;
+    }
+
+}
+
+</style>
+</head>
+
+<body>
+
+
+<!-- =========================================================
+     TITLE PAGE
+========================================================= -->
+
+<section id="titlePage" class="page active">
+
+    <div class="titleDecor">
+
+        <div class="decor one">⭐</div>
+
+        <div class="decor two">🎯</div>
+
+        <div class="decor three">📚</div>
+
+        <div class="decor four">🎲</div>
+
+    </div>
+
+
+    <div class="titleCard">
+
+        <div class="titleRibbon">
+            TEACHER KHEN'S CLASSROOM GAME
+        </div>
+
+
+        <h1 class="mainTitle">
+            Name &amp; Role<br>
+            Randomizer
+        </h1>
+
+
+        <div class="titleSubtitle">
+            Randomize students, groups, roles, and classroom tasks
+            in a fun and simple way!
+        </div>
+
+
+        <div class="featurePills">
+
+            <div class="featurePill">
+                👤 Students
+            </div>
+
+            <div class="featurePill">
+                🎭 Roles
+            </div>
+
+            <div class="featurePill">
+                👥 Groups
+            </div>
+
+            <div class="featurePill">
+                🎲 Randomize
+            </div>
+
+        </div>
+
+
+        <div class="titleButtons">
+
+            <button
+                class="bigButton startButton"
+                onclick="goToSettings()"
+            >
+                ▶ START GAME
+            </button>
+
+
+            <button
+                class="bigButton settingsButton"
+                onclick="goToSettings()"
+            >
+                ⚙ SETTINGS
+            </button>
+
+        </div>
+
+
+        <div class="credit">
+            Teacher Khen • Classroom Learning Game
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- =========================================================
+     SETTINGS PAGE
+========================================================= -->
+
+<section id="settingsPage" class="page">
+
+    <div class="settingsShell">
+
+
+        <div class="topBar">
+
+            <div class="appLogo">
+                Name &amp; Role Randomizer
+            </div>
+
+
+            <div class="topBarButtons">
+
+                <button
+                    class="smallButton"
+                    onclick="goHome()"
+                >
+                    HOME
+                </button>
+
+            </div>
+
+        </div>
+
+
+        <div class="settingsIntro">
+
+            <h2>
+                Game Settings
+            </h2>
+
+
+            <p>
+                Add your students, roles or tasks, optional notes,
+                and pictures for your classroom presentation.
+            </p>
+
+        </div>
+
+
+        <div class="settingsGrid">
+
+
+            <div class="settingsCard">
+
+                <h3>
+                    👤 Student Names
+                </h3>
+
+
+                <textarea
+                    id="namesInput"
+                    placeholder="Example:
+Anna
+Ben
+Carlos
+Diana
+Ethan
+Grace"
+                ></textarea>
+
+            </div>
+
+
+            <div class="settingsCard">
+
+                <h3>
+                    🎭 Roles / Tasks
+                </h3>
+
+
+                <textarea
+                    id="rolesInput"
+                    placeholder="Example:
+doctor-doctors
+teacher-teachers
+leader-leaders
+reader-readers"
+                ></textarea>
+
+            </div>
+
+
+            <div class="settingsCard fullWidth">
+
+                <h3>
+                    📝 Notes / Classroom Language
+                </h3>
+
+
+                <textarea
+                    id="notesInput"
+                    placeholder="Example:
+Sentence Structure:
+He is a doctor.
+She is a teacher.
+They are doctors.
+
+Target Language:
+I am...
+We are...
+They are..."
+                ></textarea>
+
+            </div>
+
+
+            <div class="settingsCard fullWidth">
+
+                <h3>
+                    🖼️ Role / Task Pictures
+                </h3>
+
+
+                <div
+                    id="rolePictureGrid"
+                    class="rolePictureGrid"
+                ></div>
+
+            </div>
+
+        </div>
+
+
+        <div class="settingsActions">
+
+            <button
+                class="actionButton saveGo"
+                onclick="saveAndGoToGame()"
+            >
+                ▶ SAVE &amp; GO TO GAME
+            </button>
+
+
+            <button
+                class="actionButton saveFile"
+                onclick="saveFile()"
+            >
+                💾 SAVE FILE
+            </button>
+
+
+            <button
+                class="actionButton loadFile"
+                onclick="loadFile()"
+            >
+                📂 LOAD FILE
+            </button>
+
+
+            <button
+                class="actionButton clearFile"
+                onclick="clearAll()"
+            >
+                🗑 CLEAR
+            </button>
+
+
+            <button
+                class="actionButton homeFile"
+                onclick="goHome()"
+            >
+                🏠 HOME
+            </button>
+
+        </div>
+
+
+        <input
+            type="file"
+            id="fileInput"
+            accept=".json,application/json"
+            style="display:none"
+        >
+
+    </div>
+
+</section>
+
+
+<!-- =========================================================
+     GAME PAGE
+========================================================= -->
+
+<section id="gamePage" class="page">
+
+    <div class="gameShell">
+
+
+        <div class="topBar">
+
+            <div class="appLogo">
+                Name &amp; Role Randomizer
+            </div>
+
+
+            <div class="topBarButtons">
+
+                <button
+                    class="smallButton"
+                    onclick="goToSettings()"
+                >
+                    ⚙ SETTINGS
+                </button>
+
+
+                <button
+                    class="smallButton"
+                    onclick="goHome()"
+                >
+                    🏠 HOME
+                </button>
+
+            </div>
+
+        </div>
+
+
+        <div class="gameTitle">
+            Classroom Assignments
+        </div>
+
+
+        <div class="languageBox">
+
+            <div class="promptLabel">
+                Classroom Language
+            </div>
+
+
+            <div
+                id="promptText"
+                class="promptText"
+            >
+                Randomize your classroom assignments!
+            </div>
+
+        </div>
+
+
+        <div class="controlRow">
+
+            <button
+                id="singularButton"
+                class="modeButton active"
+                onclick="setMode('singular')"
+            >
+                👤 Singular
+            </button>
+
+
+            <button
+                id="groupButton"
+                class="modeButton"
+                onclick="setMode('groups')"
+            >
+                👥 Plural / Groups
+            </button>
+
+
+            <button
+                id="mixedButton"
+                class="modeButton"
+                onclick="setMode('mixed')"
+            >
+                🔀 Mixed
+            </button>
+
+
+            <button
+                class="randomizeButton"
+                onclick="randomizeAssignments()"
+            >
+                🎲 RANDOMIZE
+            </button>
+
+
+            <button
+                class="readButton"
+                onclick="readAssignments()"
+            >
+                🔊 READ
+            </button>
+
+
+            <button
+                class="printButton"
+                onclick="printAssignments()"
+            >
+                🖨 PRINT
+            </button>
+
+
+            <button
+                class="helpButton"
+                onclick="openHelp()"
+            >
+                ❓ HELP
+            </button>
+
+        </div>
+
+
+        <div class="assignmentBox">
+
+            <table class="resultsTable">
+
+                <colgroup>
+
+                    <col class="nameColumn">
+
+                    <col class="roleColumn">
+
+                </colgroup>
+
+
+                <thead>
+
+                    <tr>
+
+                        <th>
+                            👤 NAMES
+                        </th>
+
+
+                        <th>
+                            🎭 ROLES / TASKS
+                        </th>
+
+                    </tr>
+
+                </thead>
+
+
+                <tbody id="resultsBody">
+
+                    <tr class="emptyRow">
+
+                        <td colspan="2">
+
+                            Add students and roles,
+                            then press RANDOMIZE.
+
+                        </td>
+
+                    </tr>
+
+                </tbody>
+
+            </table>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- =========================================================
+     HELP MODAL
+========================================================= -->
+
+<div
+    id="helpModal"
+    class="modal"
+>
+
+    <div class="modalCard">
+
+        <h2>
+            How to Use the Game
+        </h2>
+
+
+        <p>
+            <strong>1. Singular:</strong>
+            Every student receives an individual role or task.
+        </p>
+
+
+        <p>
+            <strong>2. Plural / Groups:</strong>
+            Students are randomly divided into groups.
+            Each group receives one role or task.
+        </p>
+
+
+        <p>
+            <strong>3. Mixed:</strong>
+            Some students receive individual roles,
+            while the remaining students are randomly divided
+            into multiple groups. The number of groups can
+            change each time you randomize.
+        </p>
+
+
+        <p>
+            <strong>4. Randomize:</strong>
+            Press RANDOMIZE to create a new assignment.
+        </p>
+
+
+        <p>
+            <strong>5. Pictures:</strong>
+            You can upload a picture for each role or task.
+        </p>
+
+
+        <p>
+            <strong>Tip:</strong>
+            For singular and plural roles, you can use the format
+            <strong>doctor-doctors</strong>.
+        </p>
+
+
+        <button
+            class="closeModal"
+            onclick="closeHelp()"
+        >
+            CLOSE
+        </button>
+
+    </div>
+
+</div>
+
+
+<script>
+
+let names = [];
+
+let roles = [];
+
+let notes = "";
+
+let currentMode = "singular";
+
+let assignments = [];
+
+let rolePhotos = {};
+
+
+/* =========================================================
+   NAVIGATION
+========================================================= */
+
+function showPage(id){
+
+    document
+        .querySelectorAll(".page")
+        .forEach(page => {
+
+            page.classList.remove("active");
+
+        });
+
+
+    const page =
+        document.getElementById(id);
+
+
+    if(page){
+
+        page.classList.add("active");
+
+    }
+
+}
+
+
+function goHome(){
+
+    showPage("titlePage");
+
+}
+
+
+function goToSettings(){
+
+    updateRolePictureInputs();
+
+    showPage("settingsPage");
+
+}
+
+
+function goToGame(){
+
+    showPage("gamePage");
+
+}
+
+
+/* =========================================================
+   PARSING
+========================================================= */
+
+function parseLines(text){
+
+    return text
+        .split(/\r?\n/)
+        .map(x => x.trim())
+        .filter(Boolean);
+
+}
+
+
+function parseRole(role){
+
+    const parts =
+        role.split("-");
+
+
+    if(parts.length >= 2){
+
+        return {
+
+            singular:
+                parts[0].trim(),
+
+            plural:
+                parts
+                    .slice(1)
+                    .join("-")
+                    .trim()
+
+        };
+
+    }
+
+
+    return {
+
+        singular:
+            role.trim(),
+
+        plural:
+            role.trim()
+
+    };
+
+}
+
+
+/* =========================================================
+   SHUFFLE
+========================================================= */
+
+function shuffle(array){
+
+    const result =
+        [...array];
+
+
+    for(
+        let i = result.length - 1;
+        i > 0;
+        i--
+    ){
+
+        const j =
+            Math.floor(
+                Math.random() * (i + 1)
+            );
+
+
+        [
+            result[i],
+            result[j]
+        ] =
+        [
+            result[j],
+            result[i]
+        ];
+
+    }
+
+
+    return result;
+
+}
+
+
+/* =========================================================
+   ROLE POOL
+========================================================= */
+
+function createRolePool(){
+
+    if(roles.length === 0){
+
+        return [];
+
+    }
+
+
+    return shuffle(roles);
+
+}
+
+
+function getRoleForIndex(
+    rolePool,
+    index
+){
+
+    if(rolePool.length === 0){
+
+        return "";
+
+    }
+
+
+    return rolePool[
+        index % rolePool.length
+    ];
+
+}
+
+
+/* =========================================================
+   PLURAL / GROUP MODE
+========================================================= */
+
+function getGroupCount(count){
+
+    if(count <= 2){
+
+        return count;
+
+    }
+
+
+    if(count <= 6){
+
+        return 3;
+
+    }
+
+
+    if(count <= 10){
+
+        return 4;
+
+    }
+
+
+    if(count <= 15){
+
+        return 5;
+
+    }
+
+
+    if(count < 20){
+
+        return 5;
+
+    }
+
+
+    return Math.max(
+        6,
+        Math.ceil(count / 3)
+    );
+
+}
+
+
+function createGroups(studentList){
+
+    if(studentList.length === 0){
+
+        return [];
+
+    }
+
+
+    const groupCount =
+        getGroupCount(
+            studentList.length
+        );
+
+
+    if(groupCount <= 0){
+
+        return [];
+
+    }
+
+
+    const shuffledStudents =
+        shuffle(studentList);
+
+
+    const groups =
+        Array.from(
+            {
+                length:groupCount
+            },
+            () => []
+        );
+
+
+    shuffledStudents.forEach(
+        (student,index) => {
+
+            groups[
+                index % groupCount
+            ].push(student);
+
+        }
+    );
+
+
+    return groups.filter(
+        group =>
+            group.length > 0
+    );
+
+}
+
+
+/* =========================================================
+   MIXED MODE
+========================================================= */
+
+function getMixedStructure(total){
+
+    if(total <= 2){
+
+        return {
+
+            individuals:total,
+
+            groups:0
+
+        };
+
+    }
+
+
+    if(total <= 6){
+
+        const groups = 2;
+
+
+        const minIndividuals = 1;
+
+
+        const maxIndividuals =
+            Math.min(
+                2,
+                total - groups
+            );
+
+
+        const individuals =
+            randomInteger(
+                minIndividuals,
+                maxIndividuals
+            );
+
+
+        return {
+
+            individuals,
+            groups
+
+        };
+
+    }
+
+
+    if(total <= 10){
+
+        const groups =
+            randomInteger(
+                2,
+                3
+            );
+
+
+        const maxIndividuals =
+            Math.min(
+                3,
+                total - groups
+            );
+
+
+        const individuals =
+            randomInteger(
+                2,
+                maxIndividuals
+            );
+
+
+        return {
+
+            individuals,
+            groups
+
+        };
+
+    }
+
+
+    if(total <= 15){
+
+        const groups =
+            randomInteger(
+                2,
+                4
+            );
+
+
+        const maxIndividuals =
+            Math.min(
+                4,
+                total - groups
+            );
+
+
+        const individuals =
+            randomInteger(
+                3,
+                maxIndividuals
+            );
+
+
+        return {
+
+            individuals,
+            groups
+
+        };
+
+    }
+
+
+    if(total <= 20){
+
+        const groups =
+            randomInteger(
+                3,
+                5
+            );
+
+
+        const maxIndividuals =
+            Math.min(
+                5,
+                total - groups
+            );
+
+
+        const individuals =
+            randomInteger(
+                4,
+                maxIndividuals
+            );
+
+
+        return {
+
+            individuals,
+            groups
+
+        };
+
+    }
+
+
+    const base =
+        Math.max(
+            2,
+            Math.floor(total / 5)
+        );
+
+
+    const groups =
+        randomInteger(
+            base,
+            base + 2
+        );
+
+
+    const maxIndividuals =
+        Math.min(
+            Math.floor(total / 3),
+            total - groups
+        );
+
+
+    const minIndividuals =
+        Math.min(
+            Math.max(
+                3,
+                Math.floor(total / 4)
+            ),
+            maxIndividuals
+        );
+
+
+    const individuals =
+        randomInteger(
+            minIndividuals,
+            maxIndividuals
+        );
+
+
+    return {
+
+        individuals,
+        groups
+
+    };
+
+}
+
+
+/* =========================================================
+   RANDOM INTEGER
+========================================================= */
+
+function randomInteger(min,max){
+
+    if(max < min){
+
+        return min;
+
+    }
+
+
+    return Math.floor(
+        Math.random() *
+        (max - min + 1)
+    ) + min;
+
+}
+
+
+/* =========================================================
+   CREATE MIXED GROUPS
+========================================================= */
+
+function createMixedGroups(
+    studentList,
+    desiredGroupCount
+){
+
+    if(
+        studentList.length === 0 ||
+        desiredGroupCount <= 0
+    ){
+
+        return [];
+
+    }
+
+
+    const groupCount =
+        Math.min(
+            desiredGroupCount,
+            studentList.length
+        );
+
+
+    const shuffledStudents =
+        shuffle(studentList);
+
+
+    const groups =
+        Array.from(
+            {
+                length:groupCount
+            },
+            () => []
+        );
+
+
+    shuffledStudents.forEach(
+        (student,index) => {
+
+            groups[
+                index % groupCount
+            ].push(student);
+
+        }
+    );
+
+
+    return groups.filter(
+        group =>
+            group.length > 0
+    );
+
+}
+
+
+/* =========================================================
+   RANDOMIZER SOUND
+   Uses sound.mp3
+========================================================= */
+
+function playRandomizerSound(){
+
+    try{
+
+        const sound =
+            new Audio("sound.mp3");
+
+
+        sound.currentTime = 0;
+
+
+        sound.play().catch(
+            error => {
+
+                console.log(
+                    "Randomizer sound unavailable",
+                    error
+                );
+
+            }
+        );
+
+    }
+    catch(error){
+
+        console.log(
+            "Randomizer sound unavailable",
+            error
+        );
+
+    }
+
+}
+
+
+/* =========================================================
+   RANDOMIZE ASSIGNMENTS
+========================================================= */
+
+function randomizeAssignments(){
+
+    collectSettings();
+
+
+    if(names.length === 0){
+
+        alert(
+            "Please enter student names first."
+        );
+
+        return;
+
+    }
+
+
+    if(roles.length === 0){
+
+        alert(
+            "Please enter at least one role or task."
+        );
+
+        return;
+
+    }
+
+
+    playRandomizerSound();
+
+
+    const rolePool =
+        createRolePool();
+
+
+    assignments = [];
+
+
+    if(currentMode === "singular"){
+
+        const shuffledStudents =
+            shuffle(names);
+
+
+        shuffledStudents.forEach(
+            (student,index) => {
+
+                assignments.push({
+
+                    names:[student],
+
+                    role:
+                        getRoleForIndex(
+                            rolePool,
+                            index
+                        ),
+
+                    group:false
+
+                });
+
+            }
+        );
+
+    }
+
+
+    else if(currentMode === "groups"){
+
+        const groups =
+            createGroups(names);
+
+
+        groups.forEach(
+            (group,index) => {
+
+                assignments.push({
+
+                    names:group,
+
+                    role:
+                        getRoleForIndex(
+                            rolePool,
+                            index
+                        ),
+
+                    group:true
+
+                });
+
+            }
+        );
+
+    }
+
+
+    else if(currentMode === "mixed"){
+
+        assignments =
+            createMixedAssignments(
+                shuffle(names),
+                rolePool
+            );
+
+    }
+
+
+    renderAssignments();
+
+    updatePrompt();
+
+}
+
+
+/* =========================================================
+   CREATE MIXED ASSIGNMENTS
+========================================================= */
+
+function createMixedAssignments(
+    studentList,
+    rolePool
+){
+
+    const result = [];
+
+    const total =
+        studentList.length;
+
+
+    if(total <= 2){
+
+        studentList.forEach(
+            (student,index) => {
+
+                result.push({
+
+                    names:[student],
+
+                    role:
+                        getRoleForIndex(
+                            rolePool,
+                            index
+                        ),
+
+                    group:false
+
+                });
+
+            }
+        );
+
+
+        return result;
+
+    }
+
+
+    const structure =
+        getMixedStructure(
+            total
+        );
+
+
+    let individualCount =
+        structure.individuals;
+
+
+    let groupCount =
+        structure.groups;
+
+
+    if(
+        individualCount +
+        groupCount >
+        total
+    ){
+
+        groupCount =
+            Math.max(
+                2,
+                total - individualCount
+            );
+
+    }
+
+
+    if(
+        total - individualCount <
+        groupCount
+    ){
+
+        individualCount =
+            Math.max(
+                1,
+                total - groupCount
+            );
+
+    }
+
+
+    const individualStudents =
+        studentList.slice(
+            0,
+            individualCount
+        );
+
+
+    const remainingStudents =
+        studentList.slice(
+            individualCount
+        );
+
+
+    individualStudents.forEach(
+        (student,index) => {
+
+            result.push({
+
+                names:[student],
+
+                role:
+                    getRoleForIndex(
+                        rolePool,
+                        index
+                    ),
+
+                group:false
+
+            });
+
+        }
+    );
+
+
+    if(
+        remainingStudents.length > 0 &&
+        groupCount > 0
+    ){
+
+        const actualGroupCount =
+            Math.min(
+                groupCount,
+                remainingStudents.length
+            );
+
+
+        const groups =
+            createMixedGroups(
+                remainingStudents,
+                actualGroupCount
+            );
+
+
+        groups.forEach(
+            (group,index) => {
+
+                result.push({
+
+                    names:group,
+
+                    role:
+                        getRoleForIndex(
+                            rolePool,
+                            individualCount + index
+                        ),
+
+                    group:true
+
+                });
+
+            }
+        );
+
+    }
+
+
+    return result;
+
+}
+
+
+/* =========================================================
+   RENDER ASSIGNMENTS
+========================================================= */
+
+function renderAssignments(){
+
+    const body =
+        document.getElementById(
+            "resultsBody"
+        );
+
+
+    body.innerHTML = "";
+
+
+    if(assignments.length === 0){
+
+        body.innerHTML = `
+            <tr class="emptyRow">
+                <td colspan="2">
+                    No assignments yet.
+                </td>
+            </tr>
+        `;
+
+        return;
+
+    }
+
+
+    assignments.forEach(
+        assignment => {
+
+            const row =
+                document.createElement(
+                    "tr"
+                );
+
+
+            const nameCell =
+                document.createElement(
+                    "td"
+                );
+
+
+            nameCell.className =
+                "nameCell";
+
+
+            if(assignment.group){
+
+                const groupContainer =
+                    document.createElement(
+                        "div"
+                    );
+
+
+                groupContainer.className =
+                    "groupName";
+
+
+                assignment.names.forEach(
+                    student => {
+
+                        const studentLine =
+                            document.createElement(
+                                "div"
+                            );
+
+
+                        studentLine.className =
+                            "groupStudent";
+
+
+                        studentLine.textContent =
+                            student;
+
+
+                        groupContainer.appendChild(
+                            studentLine
+                        );
+
+                    }
+                );
+
+
+                nameCell.appendChild(
+                    groupContainer
+                );
+
+            }
+            else{
+
+                nameCell.textContent =
+                    assignment.names[0];
+
+            }
+
+
+            const roleCell =
+                document.createElement(
+                    "td"
+                );
+
+
+            roleCell.className =
+                "roleCell";
+
+
+            const roleContent =
+                document.createElement(
+                    "div"
+                );
+
+
+            roleContent.className =
+                "roleContent";
+
+
+            const photo =
+                document.createElement(
+                    "img"
+                );
+
+
+            photo.className =
+                "rolePicture";
+
+
+            const photoData =
+                rolePhotos[
+                    assignment.role
+                ];
+
+
+            if(photoData){
+
+                photo.src =
+                    photoData;
+
+            }
+            else{
+
+                photo.style.display =
+                    "none";
+
+            }
+
+
+            const roleWord =
+                document.createElement(
+                    "div"
+                );
+
+
+            roleWord.className =
+                "roleWord";
+
+
+            const parsed =
+                parseRole(
+                    assignment.role
+                );
+
+
+            roleWord.textContent =
+                assignment.group
+                    ? parsed.plural
+                    : parsed.singular;
+
+
+            roleContent.appendChild(
+                photo
+            );
+
+
+            roleContent.appendChild(
+                roleWord
+            );
+
+
+            roleCell.appendChild(
+                roleContent
+            );
+
+
+            row.appendChild(
+                nameCell
+            );
+
+
+            row.appendChild(
+                roleCell
+            );
+
+
+            body.appendChild(
+                row
+            );
+
+        }
+    );
+
+}
+
+
+/* =========================================================
+   MODE
+========================================================= */
+
+function setMode(mode){
+
+    currentMode =
+        mode;
+
+
+    document
+        .querySelectorAll(
+            ".modeButton"
+        )
+        .forEach(
+            button => {
+
+                button.classList.remove(
+                    "active"
+                );
+
+            }
+        );
+
+
+    if(mode === "singular"){
+
+        document
+            .getElementById(
+                "singularButton"
+            )
+            .classList.add(
+                "active"
+            );
+
+    }
+
+
+    if(mode === "groups"){
+
+        document
+            .getElementById(
+                "groupButton"
+            )
+            .classList.add(
+                "active"
+            );
+
+    }
+
+
+    if(mode === "mixed"){
+
+        document
+            .getElementById(
+                "mixedButton"
+            )
+            .classList.add(
+                "active"
+            );
+
+    }
+
+
+    updatePrompt();
+
+}
+
+
+/* =========================================================
+   PROMPT
+========================================================= */
+
+function updatePrompt(){
+
+    const prompt =
+        document.getElementById(
+            "promptText"
+        );
+
+
+    if(notes){
+
+        const firstLine =
+            notes
+                .split(/\r?\n/)
+                .map(
+                    x => x.trim()
+                )
+                .find(Boolean);
+
+
+        if(firstLine){
+
+            prompt.textContent =
+                firstLine;
+
+            return;
+
+        }
+
+    }
+
+
+    if(currentMode === "singular"){
+
+        prompt.textContent =
+            "Each student has one role or task.";
+
+    }
+    else if(currentMode === "groups"){
+
+        prompt.textContent =
+            "Each group has one role or task.";
+
+    }
+    else{
+
+        prompt.textContent =
+            "Some students work individually and others work in multiple groups.";
+
+    }
+
+}
+
+
+/* =========================================================
+   ROLE PICTURES
+========================================================= */
+
+function updateRolePictureInputs(){
+
+    const rolesNow =
+        parseLines(
+            document
+                .getElementById(
+                    "rolesInput"
+                )
+                .value
+        );
+
+
+    const container =
+        document.getElementById(
+            "rolePictureGrid"
+        );
+
+
+    const previousPhotos =
+        {
+            ...rolePhotos
+        };
+
+
+    container.innerHTML = "";
+
+
+    if(rolesNow.length === 0){
+
+        container.innerHTML =
+            "<p style='font-weight:700;opacity:.7;'>Enter roles or tasks above to add pictures.</p>";
+
+        return;
+
+    }
+
+
+    rolesNow.forEach(
+        role => {
+
+            const item =
+                document.createElement(
+                    "div"
+                );
+
+
+            item.className =
+                "rolePictureItem";
+
+
+            const label =
+                document.createElement(
+                    "strong"
+                );
+
+
+            label.textContent =
+                role;
+
+
+            const input =
+                document.createElement(
+                    "input"
+                );
+
+
+            input.type =
+                "file";
+
+
+            input.accept =
+                "image/*";
+
+
+            const preview =
+                document.createElement(
+                    "img"
+                );
+
+
+            preview.className =
+                "picturePreview";
+
+
+            const existing =
+                previousPhotos[role];
+
+
+            if(existing){
+
+                preview.src =
+                    existing;
+
+            }
+            else{
+
+                preview.style.display =
+                    "none";
+
+            }
+
+
+            input.addEventListener(
+                "change",
+                event => {
+
+                    const file =
+                        event.target.files[0];
+
+
+                    if(!file){
+
+                        return;
+
+                    }
+
+
+                    const reader =
+                        new FileReader();
+
+
+                    reader.onload =
+                        function(e){
+
+                            rolePhotos[role] =
+                                e.target.result;
+
+
+                            preview.src =
+                                e.target.result;
+
+
+                            preview.style.display =
+                                "block";
+
+                        };
+
+
+                    reader.readAsDataURL(
+                        file
+                    );
+
+                }
+            );
+
+
+            item.appendChild(
+                label
+            );
+
+
+            item.appendChild(
+                input
+            );
+
+
+            item.appendChild(
+                preview
+            );
+
+
+            container.appendChild(
+                item
+            );
+
+        }
+    );
+
+}
+
+
+/* =========================================================
+   COLLECT SETTINGS
+========================================================= */
+
+function collectSettings(){
+
+    names =
+        parseLines(
+            document
+                .getElementById(
+                    "namesInput"
+                )
+                .value
+        );
+
+
+    roles =
+        parseLines(
+            document
+                .getElementById(
+                    "rolesInput"
+                )
+                .value
+        );
+
+
+    notes =
+        document
+            .getElementById(
+                "notesInput"
+            )
+            .value
+            .trim();
+
+}
+
+
+/* =========================================================
+   SAVE AND GO
+========================================================= */
+
+function saveAndGoToGame(){
+
+    collectSettings();
+
+
+    if(names.length === 0){
+
+        alert(
+            "Please enter student names first."
+        );
+
+        return;
+
+    }
+
+
+    if(roles.length === 0){
+
+        alert(
+            "Please enter roles or tasks first."
+        );
+
+        return;
+
+    }
+
+
+    goToGame();
+
+
+    assignments = [];
+
+
+    document
+        .getElementById(
+            "resultsBody"
+        )
+        .innerHTML = `
+            <tr class="emptyRow">
+                <td colspan="2">
+                    Press RANDOMIZE to create assignments.
+                </td>
+            </tr>
+        `;
+
+
+    updatePrompt();
+
+}
+
+
+/* =========================================================
+   SAVE FILE
+========================================================= */
+
+function saveFile(){
+
+    collectSettings();
+
+
+    const data = {
+
+        names,
+        roles,
+        notes,
+        currentMode,
+        rolePhotos,
+        assignments
+
+    };
+
+
+    const blob =
+        new Blob(
+            [
+                JSON.stringify(
+                    data,
+                    null,
+                    2
+                )
+            ],
+            {
+                type:
+                    "application/json"
+            }
+        );
+
+
+    const url =
+        URL.createObjectURL(
+            blob
+        );
+
+
+    const link =
+        document.createElement(
+            "a"
+        );
+
+
+    link.href =
+        url;
+
+
+    link.download =
+        "teacher-khen-name-role-randomizer.json";
+
+
+    link.click();
+
+
+    URL.revokeObjectURL(
+        url
+    );
+
+}
+
+
+/* =========================================================
+   LOAD FILE
+========================================================= */
+
+function loadFile(){
+
+    document
+        .getElementById(
+            "fileInput"
+        )
+        .click();
+
+}
+
+
+document
+    .getElementById(
+        "fileInput"
+    )
+    .addEventListener(
+        "change",
+        function(event){
+
+            const file =
+                event.target.files[0];
+
+
+            if(!file){
+
+                return;
+
+            }
+
+
+            const reader =
+                new FileReader();
+
+
+            reader.onload =
+                function(e){
+
+                    try{
+
+                        const data =
+                            JSON.parse(
+                                e.target.result
+                            );
+
+
+                        names =
+                            Array.isArray(
+                                data.names
+                            )
+                            ? data.names
+                            : [];
+
+
+                        roles =
+                            Array.isArray(
+                                data.roles
+                            )
+                            ? data.roles
+                            : [];
+
+
+                        notes =
+                            data.notes || "";
+
+
+                        currentMode =
+                            data.currentMode ||
+                            "singular";
+
+
+                        rolePhotos =
+                            data.rolePhotos ||
+                            {};
+
+
+                        assignments =
+                            Array.isArray(
+                                data.assignments
+                            )
+                            ? data.assignments
+                            : [];
+
+
+                        document
+                            .getElementById(
+                                "namesInput"
+                            )
+                            .value =
+                            names.join(
+                                "\n"
+                            );
+
+
+                        document
+                            .getElementById(
+                                "rolesInput"
+                            )
+                            .value =
+                            roles.join(
+                                "\n"
+                            );
+
+
+                        document
+                            .getElementById(
+                                "notesInput"
+                            )
+                            .value =
+                            notes;
+
+
+                        updateRolePictureInputs();
+
+
+                        setMode(
+                            currentMode
+                        );
+
+
+                        alert(
+                            "File loaded successfully!"
+                        );
+
+                    }
+                    catch(error){
+
+                        alert(
+                            "Unable to load this file."
+                        );
+
+                    }
+
+                };
+
+
+            reader.readAsText(
+                file
+            );
+
+
+            event.target.value =
+                "";
+
+        }
+    );
+
+
+/* =========================================================
+   CLEAR
+========================================================= */
+
+function clearAll(){
+
+    if(
+        !confirm(
+            "Clear all names, roles, notes, pictures, and assignments?"
+        )
+    ){
+
+        return;
+
+    }
+
+
+    names = [];
+
+    roles = [];
+
+    notes = "";
+
+    assignments = [];
+
+    rolePhotos = {};
+
+    currentMode =
+        "singular";
+
+
+    document
+        .getElementById(
+            "namesInput"
+        )
+        .value = "";
+
+
+    document
+        .getElementById(
+            "rolesInput"
+        )
+        .value = "";
+
+
+    document
+        .getElementById(
+            "notesInput"
+        )
+        .value = "";
+
+
+    updateRolePictureInputs();
+
+
+    setMode(
+        "singular"
+    );
+
+}
+
+
+/* =========================================================
+   READ
+========================================================= */
+
+function readAssignments(){
+
+    if(assignments.length === 0){
+
+        alert(
+            "Please randomize the assignments first."
+        );
+
+        return;
+
+    }
+
+
+    if(
+        !("speechSynthesis" in window)
+    ){
+
+        alert(
+            "Speech is not supported by this browser."
+        );
+
+        return;
+
+    }
+
+
+    speechSynthesis.cancel();
+
+
+    const text =
+        assignments
+            .map(
+                (assignment,index) => {
+
+                    const students =
+                        assignment.names.join(
+                            ", "
+                        );
+
+
+                    const parsed =
+                        parseRole(
+                            assignment.role
+                        );
+
+
+                    const role =
+                        assignment.group
+                            ? parsed.plural
+                            : parsed.singular;
+
+
+                    return `
+                        Assignment
+                        ${index + 1}.
+                        ${students}.
+                        ${role}.
+                    `;
+
+                }
+            )
+            .join(" ");
+
+
+    const utterance =
+        new SpeechSynthesisUtterance(
+            text
+        );
+
+
+    utterance.rate =
+        .9;
+
+
+    utterance.pitch =
+        1;
+
+
+    speechSynthesis.speak(
+        utterance
+    );
+
+}
+
+
+/* =========================================================
+   PRINT
+========================================================= */
+
+function printAssignments(){
+
+    if(assignments.length === 0){
+
+        alert(
+            "Please randomize the assignments first."
+        );
+
+        return;
+
+    }
+
+
+    window.print();
+
+}
+
+
+/* =========================================================
+   HELP
+========================================================= */
+
+function openHelp(){
+
+    document
+        .getElementById(
+            "helpModal"
+        )
+        .classList.add(
+            "active"
+        );
+
+}
+
+
+function closeHelp(){
+
+    document
+        .getElementById(
+            "helpModal"
+        )
+        .classList.remove(
+            "active"
+        );
+
+}
+
+
+document
+    .getElementById(
+        "helpModal"
+    )
+    .addEventListener(
+        "click",
+        function(event){
+
+            if(
+                event.target === this
+            ){
+
+                closeHelp();
+
+            }
+
+        }
+    );
+
+
+/* =========================================================
+   INITIALIZATION
+========================================================= */
+
+document
+    .getElementById(
+        "rolesInput"
+    )
+    .addEventListener(
+        "input",
+        updateRolePictureInputs
+    );
+
+
+updateRolePictureInputs();
+
+
+setMode(
+    "singular"
+);
+
+</script>
+
+</body>
+</html>
