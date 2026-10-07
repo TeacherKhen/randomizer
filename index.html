@@ -302,6 +302,213 @@ button{
 
 
 /* =========================================================
+   INSTRUCTIONS PAGE
+========================================================= */
+
+#instructionsPage{
+    display:none;
+
+    align-items:center;
+    justify-content:center;
+
+    min-height:100vh;
+
+    padding:25px;
+}
+
+#instructionsPage.active{
+    display:flex;
+}
+
+.instructionsCard{
+    width:min(850px,95vw);
+
+    background:rgba(255,250,235,.90);
+
+    border:5px solid var(--wood-dark);
+
+    border-radius:25px;
+
+    padding:30px;
+
+    box-shadow:
+        0 12px 0 #6f492b,
+        0 22px 35px rgba(67,43,22,.25);
+
+    backdrop-filter:blur(3px);
+    -webkit-backdrop-filter:blur(3px);
+}
+
+.instructionsTitle{
+    text-align:center;
+
+    margin:0 0 8px;
+
+    font-family:"Luckiest Guy",cursive;
+
+    font-size:clamp(32px,6vw,55px);
+
+    color:#f1bd4f;
+
+    -webkit-text-stroke:2px #704522;
+
+    text-shadow:
+        0 4px 0 #a7602c,
+        0 7px 10px rgba(60,35,15,.18);
+}
+
+.instructionsSubtitle{
+    text-align:center;
+
+    margin:0 auto 25px;
+
+    max-width:680px;
+
+    font-size:17px;
+
+    font-weight:800;
+
+    color:#694522;
+}
+
+.instructionList{
+    display:grid;
+
+    gap:12px;
+
+    margin-bottom:25px;
+}
+
+.instructionItem{
+    display:flex;
+
+    align-items:flex-start;
+
+    gap:14px;
+
+    background:rgba(255,253,246,.88);
+
+    border:2px solid #c99d67;
+
+    border-radius:15px;
+
+    padding:14px 16px;
+
+    box-shadow:
+        0 4px 0 rgba(90,55,27,.10);
+}
+
+.instructionNumber{
+    flex:0 0 42px;
+
+    width:42px;
+    height:42px;
+
+    display:flex;
+
+    align-items:center;
+    justify-content:center;
+
+    border-radius:50%;
+
+    background:#6ba76d;
+
+    color:white;
+
+    font-size:19px;
+
+    font-weight:900;
+
+    box-shadow:
+        0 3px 0 rgba(70,40,20,.2);
+}
+
+.instructionContent{
+    flex:1;
+}
+
+.instructionContent strong{
+    display:block;
+
+    margin-bottom:3px;
+
+    font-size:17px;
+
+    color:#5c3920;
+}
+
+.instructionContent span{
+    display:block;
+
+    font-size:14px;
+
+    line-height:1.5;
+
+    font-weight:700;
+
+    color:#765033;
+}
+
+.instructionsTip{
+    background:#fff0bf;
+
+    border:3px solid #e0b54e;
+
+    border-radius:14px;
+
+    padding:13px 16px;
+
+    margin-bottom:22px;
+
+    font-size:14px;
+
+    line-height:1.5;
+
+    font-weight:800;
+
+    color:#68451f;
+}
+
+.instructionsButtonArea{
+    display:flex;
+
+    justify-content:center;
+}
+
+.instructionsContinue{
+    border:0;
+
+    border-radius:15px;
+
+    padding:13px 24px;
+
+    background:#6ba76d;
+
+    color:white;
+
+    font-size:16px;
+
+    font-weight:900;
+
+    box-shadow:
+        0 5px 0 #47754a;
+
+    transition:.15s;
+}
+
+.instructionsContinue:hover{
+    transform:translateY(-2px);
+}
+
+.instructionsContinue:active{
+    transform:translateY(2px);
+
+    box-shadow:
+        0 2px 0 #47754a;
+}
+
+
+/* =========================================================
    SETTINGS
 ========================================================= */
 
@@ -1075,6 +1282,31 @@ button{
         font-size:clamp(42px,12vw,72px);
     }
 
+    .instructionsCard{
+        padding:22px 16px;
+    }
+
+    .instructionItem{
+        padding:12px;
+    }
+
+    .instructionNumber{
+        flex-basis:36px;
+
+        width:36px;
+        height:36px;
+
+        font-size:16px;
+    }
+
+    .instructionContent strong{
+        font-size:15px;
+    }
+
+    .instructionContent span{
+        font-size:13px;
+    }
+
     .assignmentBox{
         border-width:3px;
     }
@@ -1260,7 +1492,7 @@ button{
 
             <button
                 class="bigButton startButton"
-                onclick="goToSettings()"
+                onclick="startGameWithInstructions()"
             >
                 ▶ START GAME
             </button>
@@ -1278,6 +1510,208 @@ button{
 
         <div class="credit">
             Teacher Khen • Classroom Learning Game
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- =========================================================
+     INSTRUCTIONS PAGE
+========================================================= -->
+
+<section id="instructionsPage" class="page">
+
+    <div class="instructionsCard">
+
+        <h1 class="instructionsTitle">
+            How to Use
+        </h1>
+
+
+        <p class="instructionsSubtitle">
+            Follow these simple steps to randomly assign students,
+            groups, roles, or classroom tasks.
+        </p>
+
+
+        <div class="instructionList">
+
+
+            <div class="instructionItem">
+
+                <div class="instructionNumber">
+                    1
+                </div>
+
+                <div class="instructionContent">
+
+                    <strong>
+                        👤 Add your students
+                    </strong>
+
+                    <span>
+                        Go to Settings and type one student's name on each line.
+                    </span>
+
+                </div>
+
+            </div>
+
+
+            <div class="instructionItem">
+
+                <div class="instructionNumber">
+                    2
+                </div>
+
+                <div class="instructionContent">
+
+                    <strong>
+                        🎭 Add your roles or tasks
+                    </strong>
+
+                    <span>
+                        Type one role or task on each line.
+                        For example: doctor, teacher, leader, reader.
+                    </span>
+
+                </div>
+
+            </div>
+
+
+            <div class="instructionItem">
+
+                <div class="instructionNumber">
+                    3
+                </div>
+
+                <div class="instructionContent">
+
+                    <strong>
+                        🖼️ Add pictures if you want
+                    </strong>
+
+                    <span>
+                        You can upload a picture for each role or task.
+                        This is optional and helps students understand the assignment visually.
+                    </span>
+
+                </div>
+
+            </div>
+
+
+            <div class="instructionItem">
+
+                <div class="instructionNumber">
+                    4
+                </div>
+
+                <div class="instructionContent">
+
+                    <strong>
+                        💾 Save and go to the game
+                    </strong>
+
+                    <span>
+                        Click “SAVE &amp; GO TO GAME” when your students and roles are ready.
+                    </span>
+
+                </div>
+
+            </div>
+
+
+            <div class="instructionItem">
+
+                <div class="instructionNumber">
+                    5
+                </div>
+
+                <div class="instructionContent">
+
+                    <strong>
+                        👤 Choose a mode
+                    </strong>
+
+                    <span>
+                        Choose Singular for individual assignments,
+                        Plural / Groups for group assignments,
+                        or Mixed for a combination of individual students and groups.
+                    </span>
+
+                </div>
+
+            </div>
+
+
+            <div class="instructionItem">
+
+                <div class="instructionNumber">
+                    6
+                </div>
+
+                <div class="instructionContent">
+
+                    <strong>
+                        🎲 Press RANDOMIZE
+                    </strong>
+
+                    <span>
+                        The game will randomly assign the students and roles.
+                        Press it again whenever you want a new random arrangement.
+                    </span>
+
+                </div>
+
+            </div>
+
+
+            <div class="instructionItem">
+
+                <div class="instructionNumber">
+                    7
+                </div>
+
+                <div class="instructionContent">
+
+                    <strong>
+                        🔊 Use the extra tools
+                    </strong>
+
+                    <span>
+                        Use READ to hear the assignments,
+                        PRINT to print the results,
+                        and HELP if you need a quick reminder.
+                    </span>
+
+                </div>
+
+            </div>
+
+
+        </div>
+
+
+        <div class="instructionsTip">
+            💡 <strong>Teacher Tip:</strong>
+            You can randomize again anytime. Each time you press
+            RANDOMIZE, the students and groups can receive a new arrangement.
+        </div>
+
+
+        <div class="instructionsButtonArea">
+
+            <button
+                class="instructionsContinue"
+                onclick="continueFromInstructions()"
+            >
+                ✅ GOT IT — LET'S START
+            </button>
+
         </div>
 
     </div>
@@ -1719,6 +2153,10 @@ They are..."
 
 <script>
 
+/* =========================================================
+   GLOBAL DATA
+========================================================= */
+
 let names = [];
 
 let roles = [];
@@ -1730,6 +2168,8 @@ let currentMode = "singular";
 let assignments = [];
 
 let rolePhotos = {};
+
+let audioContext = null;
 
 
 /* =========================================================
@@ -1763,6 +2203,22 @@ function showPage(id){
 function goHome(){
 
     showPage("titlePage");
+
+}
+
+
+function startGameWithInstructions(){
+
+    showPage("instructionsPage");
+
+}
+
+
+function continueFromInstructions(){
+
+    updateRolePictureInputs();
+
+    showPage("settingsPage");
 
 }
 
@@ -2034,10 +2490,20 @@ function getMixedStructure(total){
 
     if(total <= 6){
 
-        const groups = 2;
+        const groupOptions =
+            [2];
+
+        const groups =
+            groupOptions[
+                Math.floor(
+                    Math.random() *
+                    groupOptions.length
+                )
+            ];
 
 
-        const minIndividuals = 1;
+        const minIndividuals =
+            1;
 
 
         const maxIndividuals =
@@ -2292,40 +2758,25 @@ function createMixedGroups(
 
 /* =========================================================
    RANDOMIZER SOUND
-   Uses sound.mp3
 ========================================================= */
 
 function playRandomizerSound(){
 
-    try{
+    const sound =
+        new Audio("sound.mp3");
 
-        const sound =
-            new Audio("sound.mp3");
+    sound.volume = 1;
 
+    sound.play().catch(
+        error => {
 
-        sound.currentTime = 0;
+            console.log(
+                "Sound unavailable",
+                error
+            );
 
-
-        sound.play().catch(
-            error => {
-
-                console.log(
-                    "Randomizer sound unavailable",
-                    error
-                );
-
-            }
-        );
-
-    }
-    catch(error){
-
-        console.log(
-            "Randomizer sound unavailable",
-            error
-        );
-
-    }
+        }
+    );
 
 }
 
@@ -2371,6 +2822,10 @@ function randomizeAssignments(){
     assignments = [];
 
 
+    /* =====================================================
+       SINGULAR
+    ===================================================== */
+
     if(currentMode === "singular"){
 
         const shuffledStudents =
@@ -2400,6 +2855,10 @@ function randomizeAssignments(){
     }
 
 
+    /* =====================================================
+       GROUPS
+    ===================================================== */
+
     else if(currentMode === "groups"){
 
         const groups =
@@ -2428,6 +2887,10 @@ function randomizeAssignments(){
 
     }
 
+
+    /* =====================================================
+       MIXED
+    ===================================================== */
 
     else if(currentMode === "mixed"){
 
